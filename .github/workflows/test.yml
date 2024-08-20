@@ -26,7 +26,7 @@ jobs:
       - name: Run Action Locally
         uses: ./  # Points to the root of the action repository
         with:
-          output_dir: "test_output"
+          output_dir: "plantuml_files"
 
       - name: Verify output
         run: |
