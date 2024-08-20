@@ -13,7 +13,7 @@ mkdir -p "$INPUT_OUTPUT_DIR"
 for file in $(find . -name '*.src.md'); do
   dest_file=$(echo "$file" | sed 's/\.src.md$/.md/')
   echo $file
-  echo $output_file
-  python /app/process_codemd.py "$file" "$output_file"
+  echo $dest_file
+  python /app/process_codemd.py "$file" "$dest_file"
 done
 
