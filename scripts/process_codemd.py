@@ -23,6 +23,7 @@ def plantuml_encode(text):
     return plantuml_encoded
 
 def process_codemd(source_file, destination_file):
+    print(f"Processing {source_file}, saved to {destination_file}...")
     # Initialize counter for diagram numbering
     counter = 1
     output_dir = "plantuml_files"
@@ -90,5 +91,5 @@ if __name__ == "__main__":
     if len(sys.argv) != 3:
         print("Usage: python process_codemd.py <source_file.codemd> <destination_file.md>")
         sys.exit(1)
-
+    
     process_codemd(sys.argv[1], sys.argv[2])
