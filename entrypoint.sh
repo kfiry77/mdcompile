@@ -12,6 +12,8 @@ mkdir -p "$INPUT_OUTPUT_DIR"
 # Process all .code.md files in the repository
 for file in $(find . -name '*.src.md'); do
   dest_file=$(echo "$file" | sed 's/\.src.md$/.md/')
+  echo $file
+  echo $dest_file
   python /app/process_codemd.py "$file" "$dest_file"
 done
 

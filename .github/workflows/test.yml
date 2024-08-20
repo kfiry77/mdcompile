@@ -28,6 +28,9 @@ jobs:
         with:
           output_dir: "test_output"
 
+      - name: List files in test_output directory
+        run: ls -la test_output
+
       - name: Verify output
         run: |
           # Check if the output file was created
