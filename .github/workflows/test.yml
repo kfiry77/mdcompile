@@ -21,7 +21,7 @@ jobs:
           mkdir test_files
           
           # Create a sample .codemd file for testing
-          echo -e 'This is a test.\n\n```plantuml\nAlice -> Bob: Hello\n```' > test_files/test.codemd
+          echo -e 'This is a test.\n\n```plantuml\nAlice -> Bob: Hello\n```' > test_files/test.src.md
 
       - name: Run Action Locally
         uses: ./  # Points to the root of the action repository
