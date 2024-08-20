@@ -1,17 +1,15 @@
-# action.yml
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: "PlantUML Processing Action"
+description: "A GitHub Action to process .codemd files and convert them to .md files with embedded PlantUML diagrams."
+author: "Your Name"
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  output_dir:
+    description: "The output directory where the .md files will be saved."
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+    default: "plantuml_files"
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "docker"
+  image: "Dockerfile"
   args:
-    - ${{ inputs.who-to-greet }}
+    - ${{ inputs.output_dir }}
+
     
