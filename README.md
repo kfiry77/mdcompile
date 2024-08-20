@@ -22,7 +22,7 @@ jobs:
   plantuml:
     runs-on: ubuntu-latest
     steps:
-      - uses: your-username/your-action-repo@v1.0.0
+      - uses: kfiry77/mdcompile@v1.0.0
         with:
           output_dir: "plantuml_files"
 ```
@@ -50,7 +50,7 @@ jobs:
         uses: actions/checkout@v3
       
       - name: Process PlantUML files
-        uses: your-username/your-action-repo@v1.0.0
+        uses: kfiry/mdcompile@v1.0.0
         with:
           output_dir: "docs/diagrams"
 
