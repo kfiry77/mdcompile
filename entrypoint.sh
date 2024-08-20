@@ -9,9 +9,9 @@ fi
 # Ensure the output directory exists
 mkdir -p "$INPUT_OUTPUT_DIR"
 
-# Process all .codemd files in the repository
-for file in $(find . -name '*.codemd'); do
-  output_file="$INPUT_OUTPUT_DIR/$(basename "$file" .codemd).md"
+# Process all .code.md files in the repository
+for file in $(find . -name '*.src.md'); do
+  dest_file=$(echo "$file" | sed 's/\.src.md$/.md/')
   python /app/process_codemd.py "$file" "$output_file"
 done
 
