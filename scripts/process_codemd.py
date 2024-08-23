@@ -41,7 +41,7 @@ def process_codemd(source_file, output_dir):
         if inside_code_block:
             if line.strip() == "```":
                 # End of PlantUML block
-                filename = f"{os.path.basename(source_file).replace('src.md', '')}_diagram_{counter}.svg"
+                filename = f"{os.path.basename(source_file).replace('.src.md', '')}_diagram_{counter}.svg"
                 output_file_path = os.path.join(output_dir, filename)
                 print('output_file_path:', output_file_path)
 

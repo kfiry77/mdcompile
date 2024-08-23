@@ -43,7 +43,7 @@ jobs:
           fi
 
           # Check the contents of the generated Markdown file
-          grep -q "![diagram_1]" ./test.md || (echo "Test failed: SVG link not found." && exit 1)
+          grep -q "![Diagram 1]" ./test.md || (echo "Test failed: SVG link not found." && exit 1)
 
       - name: Clean up
         run: |
