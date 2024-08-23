@@ -22,11 +22,10 @@ def plantuml_encode(text):
     
     return plantuml_encoded
 
-def process_codemd(source_file, destination_file):
+def process_codemd(source_file, output_dir):
     print(f"Processing {source_file}, saved to {destination_file}...")
     # Initialize counter for diagram numbering
     counter = 1
-    output_dir = f"{destination_file}_mdcomplile"
     os.makedirs(output_dir, exist_ok=True)
 
     # Read the content of the source .codemd file
@@ -41,7 +40,7 @@ def process_codemd(source_file, destination_file):
         if inside_code_block:            
             if line.strip() == "```":
                 # End of PlantUML block
-                filename = f"{os.path.basename(destination_file).replace('.md', '')}_diagram_{counter}.svg"
+                filename = f"{os.path.basename(source_file).replace('src.md', '')}_diagram_{counter}.svg"
                 output_file_path = os.path.join(output_dir, filename)
                 print('output_file_path:', output_file_path)
 
@@ -82,14 +81,14 @@ def process_codemd(source_file, destination_file):
             temp_lines.append(line)
 
     # Write the modified content to the destination .md file
-    with open(destination_file, "w") as md_file:
+    with open(os.path.basename(source_file).replace('src.md', '.md'), "w") as md_file:
         md_file.writelines(temp_lines)
 
     print(f"Finished processing {source_file}, saved to {destination_file}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python process_codemd.py <source_file.codemd> <destination_file.md>")
+        print("Usage: python process_codemd.py <source_file.src.md> <destination_folder>")
         sys.exit(1)
     
     process_codemd(sys.argv[1], sys.argv[2])

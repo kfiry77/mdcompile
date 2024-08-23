@@ -2,6 +2,9 @@ name: Test Action
 
 on: [push, pull_request]
 
+env:
+  OUTPUT_DIR: "test_files"
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -17,30 +20,29 @@ jobs:
 
       - name: Create test files
         run: |
-          # Create test directory
-          mkdir test_files
-          
-          # Create a sample .codemd file for testing
-          echo -e 'This is a test.\n\n```plantuml\nAlice -> Bob: Hello\n```' > test_files/test.src.md
+          # Create a sample .src.md file for testing
+          echo -e 'This is a test.\n\n```plantuml\nAlice -> Bob: Hello\n```' > test.src.md
 
       - name: Run Action Locally
         uses: ./  # Points to the root of the action repository
         with:
-          output_dir: "test_files"
+          output_dir: $OUTPUT_DIR
 
-      - name: List files in test_output directory
-        run: ls -la ./test_files
+      - name: List files in the directory, and show the result file. 
+        run: ls -la .
+             ls -la ./$OUTPUT_DIR
+             cat ./test.md
 
       - name: Verify output
         run: |
           # Check if the output file was created
-          if [ ! -f "./test_files/test.md" ]; then
+          if [ ! -f "./test.md" ]; then
             echo "Test failed: output file not created."
             exit 1
           fi
 
           # Check the contents of the generated Markdown file
-          grep -q "![Diagram 1]" ./test_files/test.md || (echo "Test failed: SVG link not found." && exit 1)
+          grep -q "![diagram_1]" ./test.md || (echo "Test failed: SVG link not found." && exit 1)
 
       - name: Clean up
         run: |
