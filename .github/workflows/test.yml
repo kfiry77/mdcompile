@@ -34,13 +34,13 @@ jobs:
       - name: Verify output
         run: |
           # Check if the output file was created
-          if [ ! -f "test_output/test.md" ]; then
+          if [ ! -f "./test_output/test.md" ]; then
             echo "Test failed: output file not created."
             exit 1
           fi
 
           # Check the contents of the generated Markdown file
-          grep -q "![Diagram 1]" test_output/test.md || (echo "Test failed: SVG link not found." && exit 1)
+          grep -q "![Diagram 1]" ./test_output/test.md || (echo "Test failed: SVG link not found." && exit 1)
 
       - name: Clean up
         run: |
