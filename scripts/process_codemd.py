@@ -23,7 +23,7 @@ def plantuml_encode(text):
     return plantuml_encoded
 
 def process_codemd(source_file, output_dir):
-    destination_file = os.path.basename(source_file).replace('src.md', '.md')
+    destination_file = os.path.basename(source_file).replace('.src.md', '.md')
     print(f"Processing {source_file}, output_dir {output_dir} saving to {destination_file},")
     # Initialize counter for diagram numbering
     counter = 1
@@ -38,7 +38,7 @@ def process_codemd(source_file, output_dir):
     code_block = ""
 
     for line in lines:
-        if inside_code_block:            
+        if inside_code_block:
             if line.strip() == "```":
                 # End of PlantUML block
                 filename = f"{os.path.basename(source_file).replace('src.md', '')}_diagram_{counter}.svg"
