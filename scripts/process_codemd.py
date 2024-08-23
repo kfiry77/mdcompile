@@ -26,7 +26,7 @@ def process_codemd(source_file, destination_file):
     print(f"Processing {source_file}, saved to {destination_file}...")
     # Initialize counter for diagram numbering
     counter = 1
-    output_dir = "plantuml_files"
+    output_dir = f"{destination_file}_mdcomplile"
     os.makedirs(output_dir, exist_ok=True)
 
     # Read the content of the source .codemd file
