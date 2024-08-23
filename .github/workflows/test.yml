@@ -2,9 +2,6 @@ name: Test Action
 
 on: [push, pull_request]
 
-env:
-  OUTPUT_DIR: "test_files"
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -26,13 +23,13 @@ jobs:
       - name: Run Action Locally
         uses: ./  # Points to the root of the action repository
         with:
-          output_dir: $OUTPUT_DIR
+          output_dir: output_dir
 
       - name: List files in the directory, and show the result file. 
         run: ls -la .
 
       - name: List files in output directory
-        run: ls -la ./$OUTPUT_DIR
+        run: ls -la ./output_dir
 
       - name: dump the created md file. 
         run: cat ./test.md
@@ -50,4 +47,4 @@ jobs:
 
       - name: Clean up
         run: |
-          rm -rf test_files test_output
+          rm -rf test.* output_dir
