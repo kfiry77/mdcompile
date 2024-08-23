@@ -30,8 +30,12 @@ jobs:
 
       - name: List files in the directory, and show the result file. 
         run: ls -la .
-             ls -la ./$OUTPUT_DIR
-             cat ./test.md
+
+      - name: List files in output directory
+        run: ls -la ./$OUTPUT_DIR
+
+      - name: dump the created md file. 
+        run: cat ./test.md
 
       - name: Verify output
         run: |
