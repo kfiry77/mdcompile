@@ -23,7 +23,8 @@ def plantuml_encode(text):
     return plantuml_encoded
 
 def process_codemd(source_file, output_dir):
-    print(f"Processing {source_file}, saved to {destination_file}...")
+    destination_file = os.path.basename(source_file).replace('src.md', '.md')
+    print(f"Processing {source_file}, output_dir {output_dir} saving to {destination_file},")
     # Initialize counter for diagram numbering
     counter = 1
     os.makedirs(output_dir, exist_ok=True)
@@ -80,8 +81,8 @@ def process_codemd(source_file, output_dir):
         else:
             temp_lines.append(line)
 
-    # Write the modified content to the destination .md file
-    with open(os.path.basename(source_file).replace('src.md', '.md'), "w") as md_file:
+    # Write the modified content to the destination .md file    
+    with open(destination_file, "w") as md_file:
         md_file.writelines(temp_lines)
 
     print(f"Finished processing {source_file}, saved to {destination_file}")
