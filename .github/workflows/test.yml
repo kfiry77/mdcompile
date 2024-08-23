@@ -34,7 +34,7 @@ jobs:
       - name: Verify output
         run: |
           # Check if the output file was created
-          if [ ! -f "test_output/test.codemd.src.md" ]; then
+          if [ ! -f "test_output/test.src.md" ]; then
             echo "Test failed: output file not created."
             exit 1
           fi
