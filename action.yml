@@ -20,7 +20,7 @@ runs:
     run: | 
       # Process all .code.md files in the repository
       echo "Processing files..." 
-      ls -la      
+      ls -laR    
       for file in $(find . -name '*.src.md'); do
         python3 scripts/process_codemd.py "$file" "${{ inputs.output_dir }}"
       done
