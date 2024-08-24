@@ -8,7 +8,9 @@ COPY scripts/process_codemd.py /app/process_codemd.py
 COPY entrypoint.sh /app/entrypoint.sh
 
 # Install required packages
-RUN pip install requests
+RUN apt-get update && \
+    apt-get install -y git \ 
+    pip install requests
 
 # Make entrypoint.sh executable
 RUN chmod +x /app/entrypoint.sh
