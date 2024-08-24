@@ -3,11 +3,11 @@
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/kfiry77/mdcopile)
 ![GitHub](https://img.shields.io/github/license/kfiry77/mdcompile)
 
-This GitHub Action processes `.codemd` files, converts them to `.md` files, and embeds PlantUML diagrams using an external PlantUML server. It is designed to be an out-of-the-box solution, requiring minimal configuration.
+This GitHub Action processes `.src.md` files, converts them to `.md` files, and embeds PlantUML diagrams using an external PlantUML server. It is designed to be an out-of-the-box solution, requiring minimal configuration.
 
 ## Features
 
-- Converts `.codemd` files to `.md` files.
+- Rednders `.src.md` files to `.md` files.
 - Automatically detects and processes PlantUML code blocks.
 - Embeds diagrams as SVG images directly in the Markdown files.
 - Uses an external PlantUML server for fast processing.
@@ -31,7 +31,7 @@ jobs:
 
 | Input        | Description                                                     | Required | Default         |
 |--------------|-----------------------------------------------------------------|----------|-----------------|
-| `output_dir` | The directory where the processed `.md` files will be saved.    | Yes      | `plantuml_files` |
+| `output_dir` | The directory where the processed `.md` files will be saved.    | Yes      | `mdcompile_files` |
 
 ### Example Workflow
 
@@ -47,32 +47,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Process PlantUML files
-        uses: kfiry/mdcompile@v1.0.0
+        uses: kfiry/mdcompile@v1.0.2
         with:
           output_dir: "docs/diagrams"
 
-      - name: Commit and push changes
-        run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-          git add .
-          if git diff --quiet; then
-            echo "No changes to commit."
-          else
-            git commit -m "Add updated diagrams"
-            git push
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: compile markdown source
+        uses: kfiry77/mdcompile@main
+        with:
+          output_dir: "mdcompile_files"
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "compile markdown source"  
 ```
 
 ### How It Works
 
-1. **Input Directory**: The Action scans your repository for `.codemd` files.
-2. **Processing**: For each `.codemd` file, it converts PlantUML code blocks into SVG diagrams using an external PlantUML server.
+1. **Input Directory**: The Action scans your repository for `.src.md` files.
+2. **Processing**: For each `.src.md` file, it converts PlantUML code blocks into SVG diagrams using an external PlantUML server.
 3. **Output**: The processed Markdown files are saved in the specified output directory, with diagrams embedded as SVG images.
 
 ## Customization
