@@ -7,8 +7,27 @@ inputs:
     description: "The output directory where the .md files will be saved."
     required: true
     default: "mdcompile"
+
 runs:
   using: "docker"
   image: "Dockerfile"
   args:
-    - ${{ inputs.output_dir }}    
+    - ${{ inputs.output_dir }}
+
+  steps:
+  - name: Commit and Push Changes
+    run: |
+      git config --local user.email "actions@github.com"
+      git config --local user.name "GitHub Actions"
+      echo "*.puml" > ${{ inputs.output_dir }}/.gitignore
+      git add ${{ inputs.output_dir }}/.gitignore
+      git add ${{ inputs.output_dir }}/*.svg
+      git add *.md
+
+      if git diff --quiet; then
+        echo "No changes to commit."
+      else
+        git commit -m "Automated update of Markdown files"
+        git push
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
