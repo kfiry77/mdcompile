@@ -12,3 +12,23 @@ runs:
   image: "Dockerfile"
   args:
     - ${{ inputs.output_dir }}    
+
+  # This will include the commit and push steps
+  post:
+    - name: Commit and push changes
+      run: |
+        echo "*.puml" > plantuml_files/.gitignore
+        git config --local user.email "actions@github.com"
+        git config --local user.name "GitHub Actions"
+        git add plantuml_files/.gitignore
+        git add plantuml_files/*.svg
+        git add *.md
+        if git diff --quiet; then
+          echo "No changes to commit."
+        else
+          git add .
+          git commit -m "Convert PlantUML files to SVG"
+          git push
+        fi
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
