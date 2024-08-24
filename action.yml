@@ -8,6 +8,10 @@ inputs:
     required: true
     default: "mdcompile"
 
+  github_token:
+    description: "GitHub Token for authentication."
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -36,4 +40,4 @@ runs:
         git commit -m "Automated update of Markdown files"
         git push
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ inputs.github_token }}
