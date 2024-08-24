@@ -45,6 +45,3 @@ jobs:
           # Check the contents of the generated Markdown file
           grep -q "test_diagram_1.svg" ./test.md || (echo "Test failed: SVG link not found." && exit 1)
 
-      - name: Clean up
-        run: |
-          rm -rf test.* output_dir
