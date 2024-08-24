@@ -12,6 +12,7 @@ runs:
   using: "composite"
   steps:
   - name: Process files
+    shell: bash
     run: | 
       # Process all .code.md files in the repository
       echo "Processing files..."      
@@ -20,6 +21,7 @@ runs:
       done
 
   - name: Commit and Push Changes
+    shell: bash
     run: |
       git config --local user.email "actions@github.com"
       git config --local user.name "GitHub Actions"
