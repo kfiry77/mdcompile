@@ -22,7 +22,7 @@ runs:
       echo "Processing files..." 
       ls -laR    
       for file in $(find . -name '*.src.md'); do
-        python3 scripts/process_codemd.py "$file" "${{ inputs.output_dir }}"
+        python3 ./scripts/process_codemd.py "$file" "${{ inputs.output_dir }}"
       done
 
   - name: Commit and Push Changes
