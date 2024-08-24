@@ -7,38 +7,8 @@ inputs:
     description: "The output directory where the .md files will be saved."
     required: true
     default: "mdcompile"
-
-  github_token:
-    description: "GitHub Token for authentication."
-    required: true
-
 runs:
-  using: "composite"
-  steps:
-  - name: Process files
-    shell: bash
-    run: |
-      echo "Processing files..." 
-      ls -la   
-      ls -la ./scripts
-      for file in $(find . -name '*.src.md'); do
-        python3 ./scripts/process_codemd.py "$file" "${{ inputs.output_dir }}"
-      done
-
-  - name: Commit and Push Changes
-    shell: bash
-    run: |
-      git config --local user.email "actions@github.com"
-      git config --local user.name "GitHub Actions"
-      echo "*.puml" > ${{ inputs.output_dir }}/.gitignore
-      git add ${{ inputs.output_dir }}/.gitignore
-      git add ${{ inputs.output_dir }}/*.svg
-      git add *.md
-
-      if git diff --quiet; then
-        echo "No changes to commit."
-      else
-        git commit -m "Automated update of Markdown files"
-        git push
-    env:
-      GITHUB_TOKEN: ${{ inputs.github_token }}
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.output_dir }}    
