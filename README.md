@@ -50,7 +50,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Process PlantUML files
-        uses: kfiry/mdcompile@v1.0.2
+        uses: kfiry/mdcompile@v1.0.0
         with:
           output_dir: "docs/diagrams"
 
