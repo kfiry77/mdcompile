@@ -1,6 +1,6 @@
-# PlantUML Processing Action
+# Compile Markdown PlantUML code snippets 
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/kfiry77/mdcopile)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/kfiry77/mdcompile)
 ![GitHub](https://img.shields.io/github/license/kfiry77/mdcompile)
 
 This GitHub Action processes `.src.md` files, converts them to `.md` files, and embeds PlantUML diagrams using an external PlantUML server. It is designed to be an out-of-the-box solution, requiring minimal configuration.
@@ -38,31 +38,29 @@ jobs:
 Here is a full example of a workflow using this action:
 
 ```yaml
-name: Process PlantUML
+name: Process Markdown PlantUML
 
 on: [push, pull_request]
 
 jobs:
   plantuml:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Process PlantUML files
-        uses: kfiry/mdcompile@v1.0.0
-        with:
-          output_dir: "docs/diagrams"
-
       - name: compile markdown source
-        uses: kfiry77/mdcompile@main
-        with:
-          output_dir: "mdcompile_files"
+        uses: kfiry77/mdcompile@v1.0.0
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "compile markdown source"  
 ```
+
 
 ### How It Works
 
