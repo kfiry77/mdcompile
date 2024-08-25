@@ -1,5 +1,5 @@
 name: "PlantUML Processing Action"
-description: "A GitHub Action to process .codemd files and convert them to .md files with embedded PlantUML diagrams."
+description: "A GitHub Action to process .src.md files and convert them to .md files with embedded PlantUML diagrams."
 author: "Kfir Yehezkel"
 
 inputs:
