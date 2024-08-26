@@ -25,15 +25,6 @@ jobs:
         with:
           output_dir: output_dir
 
-      - name: List files in the directory, and show the result file. 
-        run: ls -la .
-
-      - name: List files in output directory
-        run: ls -la ./output_dir
-
-      - name: dump the created md file. 
-        run: cat ./test.md
-
       - name: Verify output
         run: |
           # Check if the output file was created
