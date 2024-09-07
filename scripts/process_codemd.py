@@ -6,7 +6,6 @@ import base64
 
 PLANTUML_SERVER = "http://www.plantuml.com/plantuml"
 
-
 # Custom Base64 encoding for PlantUML
 def plantuml_encode(text):
     # UTF-8 encoding
@@ -49,15 +48,19 @@ def process_codemd(source_file, output_dir):
     for line in lines:
         if inside_code_block:
             if line.strip() == "```":
-                # End of PlantUML block
-                filename = f"{os.path.basename(source_file).replace('.src.md', '')}_diagram_{counter}.svg"
-                output_file_path = os.path.join(output_dir, filename)
-                print('output_file_path:', output_file_path)
 
                 # Wrap the code block with @startuml and @enduml if not already present
                 # also cases of special diagrams is covered here.
                 if all(s not in code_block for s in diagrams_types):
                     code_block = f"@startuml\n{code_block.strip()}\n@enduml\n"
+
+                is_ditaa = "@startditaa" in code_block
+
+                # End of PlantUML block
+                filename = f"{os.path.basename(source_file).replace('.src.md', '')}_diagram_{counter}"
+                extension = "svg" if not is_ditaa else "png"
+                output_file_path = os.path.join(output_dir, f"{filename}.{extension}")
+                print(f'output_file_path: {output_file_path}')
 
                 # Encode the PlantUML code
                 encoded_diagram = plantuml_encode(code_block)
