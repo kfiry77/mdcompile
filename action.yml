@@ -1,6 +1,9 @@
 name: "PlantUML Processing Action"
 description: "A GitHub Action to process .src.md files and convert them to .md files with embedded PlantUML diagrams."
 author: "Kfir Yehezkel"
+branding:
+  icon: 'file-text'
+  color: 'blue'
 
 inputs:
   output_dir:
