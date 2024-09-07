@@ -22,7 +22,7 @@ jobs:
   plantuml:
     runs-on: ubuntu-latest
     steps:
-      - uses: kfiry77/mdcompile@v1.0.0
+      - uses: kfiry77/mdcompile@v2.0.0
         with:
           output_dir: "plantuml_files"
 ```
@@ -55,6 +55,8 @@ jobs:
       
       - name: compile markdown source
         uses: kfiry77/mdcompile@v1.0.0
+        with:
+          output_dir: "mdcompile_output"
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
