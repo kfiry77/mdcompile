@@ -82,7 +82,7 @@ def process_codemd(source_file, output_dir):
                     print(f"Error text: {response.reason}")
 
                 # Replace the code block in the Markdown with a link to the SVG
-                temp_lines.append(f"![Diagram {counter}](./{output_dir}/{filename})")
+                temp_lines.append(f"![Diagram {counter}](./{output_dir}/{filename}.{extension})")
                 temp_lines.append(f'\n<details>\n <summary>View Source</summary>\n\n')
                 temp_lines.append(f'```plantuml\n')
                 # Comment out the original PlantUML code block
