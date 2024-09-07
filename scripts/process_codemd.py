@@ -69,8 +69,14 @@ def process_codemd(source_file, output_dir):
                     # Save the SVG content
                     with open(output_file_path, "wb") as svg_file:
                         svg_file.write(response.content)
+                elif response.status_code == 400:
+                    print(f"Error in diagram  {filename}")
+                    with open(output_file_path, "wb") as svg_file:
+                        svg_file.write(response.content)
                 else:
                     print(f"Error: Unable to generate diagram for {filename}")
+                    print(f"Error status: {response.status_code}")
+                    print(f"Error text: {response.reason}")
 
                 # Replace the code block in the Markdown with a link to the SVG
                 temp_lines.append(f"![Diagram {counter}](./{output_dir}/{filename})")
