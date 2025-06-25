@@ -11,8 +11,17 @@ inputs:
     required: true
     default: "mdcompile"
 runs:
-  using: "docker"
-  image: "Dockerfile"
-  args:
-    - ${{ inputs.output_dir }}    
+  using: "composite"
+  steps:
+    - name: Set up Python virtual environment
+      shell: bash
+      run: |
+        python3 -m venv venv
+        source venv/bin/activate
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Run PlantUML Processing Script
+      shell: bash
+      run: |
+        source venv/bin/activate
+        python scripts/process_codemd.py --output_dir "${{ inputs.output_dir }}"
 
